@@ -15,3 +15,13 @@ And then execute:
 Or install it yourself as:
 
     $ gem install martlet
+
+## Usage
+
+    $ irb
+    >> require 'martlet'
+    >> client = Martlet.new('your.name@mail.mcgill.ca', 'topsecret')
+    >> pp client.grades
+    {"COMP 206"=>"A",
+     "COMP 250"=>"A"
+     ...
