@@ -1,5 +1,9 @@
-require "martlet/version"
+require 'martlet/client'
+require 'martlet/authenticator'
+require 'martlet/version'
 
 module Martlet
-  # Your code goes here...
+  def self.new(*args)
+    Client.new(*args)
+  end
 end
