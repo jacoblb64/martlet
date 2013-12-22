@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Martlet::VERSION
   spec.authors       = ["Alex Coco"]
   spec.email         = ["hello@alexcoco.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{Ruby client for McGill's student portal, Minerva.}
+  spec.summary       = %q{Client for McGill's student portal}
   spec.homepage      = ""
   spec.license       = "MIT"
 
