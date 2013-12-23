@@ -18,6 +18,8 @@ Or install it yourself as:
 
 ## Usage
 
+### Ruby
+
     $ irb
     >> require 'martlet'
     >> client = Martlet.new('your.name@mail.mcgill.ca', 'topsecret')
@@ -25,3 +27,14 @@ Or install it yourself as:
     {"COMP 206"=>"A",
      "COMP 250"=>"A"
      ...
+
+### Shell
+
+    $ martlet grades
+    Minerva email: your.name@mail.mcgill.ca
+    Password:
+    Authenticating...
+    Fetching grades...
+    COMP 206: A
+    COMP 250: A
+    ...
