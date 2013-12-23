@@ -38,3 +38,13 @@ Or install it yourself as:
     COMP 206: A
     COMP 250: A
     ...
+
+Store your credentials in ~/.martlet to avoid typing them every time
+
+    $ cat ~/.martlet
+    email: 'your.name@mail.mcgill.ca'
+    password: 'topsecret'
+    $ martlet grades
+    Authenticating...
+    Fetching grades....
+    ...
