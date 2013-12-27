@@ -36,22 +36,27 @@ def get_credentials
   return email, password
 end
 
+def run(args)
+  case args.shift
+  when nil, 'grades'
+    email, password = get_credentials
+  
+    puts 'Authenticating...'
+    client = Martlet.new(email, password)
+  
+    puts 'Fetching grades...'
+    grades = client.grades
+
+    grades.each do |number, grade|
+      puts "#{number}: #{grade}"
+    end
+  else
+    usage
+  end
+rescue Martlet::AuthenticationError => e
+  puts "An error has occurred: #{e.message}"
+end
+
 args = ARGV.dup
 ARGV.clear
-
-case args.shift
-when nil, 'grades'
-  email, password = get_credentials
-  
-  puts 'Authenticating...'
-  client = Martlet.new(email, password)
-  
-  puts 'Fetching grades...'
-  grades = client.grades
-
-  grades.each do |number, grade|
-    puts "#{number}: #{grade}"
-  end
-else
-  usage
-end
+run(args)
