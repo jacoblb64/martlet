@@ -23,6 +23,26 @@ module Martlet
       end
     end
 
+    desc "courses SEMESTER YEAR", "List current courses or courses for given semester and year"
+    def courses(semester = nil, year = nil)
+      if semester.nil? || year.nil?
+        semester, year = current_semester_and_year
+      end
+
+      puts 'Fetching courses...'
+      courses = client.courses(semester, year)
+      course_name_size = courses.map { |c| c.name.length }.max
+
+      puts "#{semester.capitalize} #{year} courses"
+
+      courses.each do |course|
+        course_row_format = "%-11s %-#{course_name_size}s @ %s\n"
+        printf course_row_format, "#{course.number}", course.name, course.location
+      end
+
+      puts 'No courses found' if courses.empty?
+    end
+
     private
 
     def credentials
@@ -56,6 +76,16 @@ module Martlet
 
     def config_path
       "#{ENV['HOME']}/.martlet"
+    end
+
+    def current_semester_and_year
+      semester = case Time.now.month
+      when 1..4  then 'winter'
+      when 5..8  then 'summer'
+      when 9..12 then 'fall'
+      end
+
+      return semester, Time.now.year
     end
   end
 end
