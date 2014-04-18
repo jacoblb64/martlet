@@ -6,7 +6,7 @@ module Martlet
     
     def initialize(email, password)
       @agent = Mechanize.new
-      @email = format_email(email)
+      @email = email.include?('@') ? email : "#{email}@mail.mcgill.ca"
       
       authenticator = Authenticator.new(@agent)
       authenticator.authenticate(@email, password)
@@ -16,15 +16,10 @@ module Martlet
       transcript = Transcript.new(@agent)
       transcript.fetch_grades
     end
-    
-    private
-    
-    def format_email(email)
-      if email.include?('@')
-        email
-      else
-        "#{email}@mail.mcgill.ca"
-      end
+
+    def courses(semester, year)
+      schedule = Schedule.new(@agent, semester, year)
+      schedule.fetch_courses
     end
   end
 end
