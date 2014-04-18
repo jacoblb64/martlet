@@ -7,12 +7,12 @@ module Martlet
     default_task :grades
 
     desc "grades", "Lists all your grades"
-    method_option :order_by, aliases: 'o', enum: ['course', 'grade']
+    method_option :sort, aliases: 's', enum: ['course', 'grade']
     def grades
       puts 'Fetching grades...'
       grades = client.grades
 
-      grades = case options.order_by
+      grades = case options['sort']
       when 'course' then grades.sort_by { |k,v| k }
       when 'grade'  then grades.sort_by { |k,v| Grade.new v }
       else grades
