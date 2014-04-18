@@ -2,61 +2,6 @@
 $:.unshift File.join File.dirname(__FILE__), '..', 'lib'
 require 'rubygems'
 require 'martlet'
-require 'yaml'
-require 'io/console'
+require 'martlet/cli'
 
-def usage
-  puts <<-STR
-USAGE:
-  martlet [command]
-
-COMMANDS:
-  grades  Lists all your grades. This is the default command.
-  STR
-end
-
-def get_credentials
-  config_path = File.join ENV['HOME'], '.martlet'
-  email = nil
-  password = nil
-  
-  if File.exist?(config_path)
-    config = YAML.load_file config_path
-    email = config['email']
-    password = config['password']
-  else
-    print 'Minerva email: '
-    email = gets.chomp
-  
-    print 'Password: '
-    password = STDIN.noecho(&:gets).chomp
-    puts
-  end
-  
-  return email, password
-end
-
-def run(args)
-  case args.shift
-  when nil, 'grades'
-    email, password = get_credentials
-  
-    puts 'Authenticating...'
-    client = Martlet.new(email, password)
-  
-    puts 'Fetching grades...'
-    grades = client.grades
-
-    grades.each do |number, grade|
-      puts "#{number}: #{grade}"
-    end
-  else
-    usage
-  end
-rescue Martlet::AuthenticationError => e
-  puts "An error has occurred: #{e.message}"
-end
-
-args = ARGV.dup
-ARGV.clear
-run(args)
+Martlet::CLI.start(ARGV)
