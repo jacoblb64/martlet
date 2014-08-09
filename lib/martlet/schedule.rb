@@ -1,5 +1,7 @@
 module Martlet
   class Schedule
+    attr_reader :semester, :year
+
     def initialize(agent, semester, year)
       @agent    = agent
       @semester = semester
