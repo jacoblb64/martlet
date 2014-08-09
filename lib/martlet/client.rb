@@ -17,8 +17,12 @@ module Martlet
       transcript.fetch_grades
     end
 
+    def schedule(semester, year)
+      Schedule.new(@agent, semester, year)
+    end
+
     def courses(semester, year)
-      schedule = Schedule.new(@agent, semester, year)
+      schedule = schedule(semester, year)
       schedule.fetch_courses
     end
   end
