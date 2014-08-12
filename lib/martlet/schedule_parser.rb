@@ -8,7 +8,8 @@ module Martlet
       courses = []
       document = Nokogiri::HTML(@html)
       course_tables = document.search("br+table[@class='datadisplaytable']")
-      course_times  = document.search("br+table[@class='datadisplaytable']+table tr+tr")
+      course_times  = document.search("br+table[@class='datadisplaytable']+table tr")
+      course_times  = split_course_times(course_times)
 
       course_tables.each_with_index do |table, index|
         course_name_info = table.search('caption').first
@@ -16,7 +17,7 @@ module Martlet
         course_name = course_name_info[0]
         course_number = course_name_info[1]
 
-        course_time_info = course_times[index].search('td').map { |d| d.text.strip }
+        course_time_info = course_times[index][0].search('td').map { |d| d.text.strip }
 
         course_data = table.search('tr td').map { |d| d.text.strip }
         args = {
@@ -40,6 +41,24 @@ module Martlet
       end
 
       courses
+    end
+
+    private
+
+    def split_course_times(course_times)
+      split = []
+      course_times.each do |info|
+        if headers?(info)
+          split << []
+        else
+          split[-1] << info
+        end
+      end
+      split
+    end
+
+    def headers?(row)
+      !row.search('th').empty?
     end
   end
 end
