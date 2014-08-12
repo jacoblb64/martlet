@@ -51,7 +51,7 @@ module Martlet
         if headers?(info)
           split << []
         else
-          split[-1] << info
+          split.last << info
         end
       end
       split
