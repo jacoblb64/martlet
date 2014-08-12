@@ -24,6 +24,7 @@ module Martlet
     end
 
     desc "courses SEMESTER YEAR", "List current courses or courses for given semester and year"
+    option :export, :type => :boolean
     def courses(semester = nil, year = nil)
       if semester.nil? || year.nil?
         semester, year = current_semester_and_year
@@ -41,6 +42,10 @@ module Martlet
       end
 
       puts 'No courses found' if courses.empty?
+
+      if options[:export] && !courses.empty?
+        puts "Exporting courses to #{semester}_#{year}.ics..."
+      end
     end
 
     private
