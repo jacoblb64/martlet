@@ -8,7 +8,8 @@ module Martlet
       courses = []
       document = Nokogiri::HTML(@html)
       course_tables = document.search("br+table[@class='datadisplaytable']")
-      course_times  = document.search("br+table[@class='datadisplaytable']+table tr+tr")
+      course_times  = document.search("br+table[@class='datadisplaytable']+table tr")
+      course_times  = split_course_times(course_times)
 
       course_tables.each_with_index do |table, index|
         course_name_info = table.search('caption').first
@@ -16,7 +17,9 @@ module Martlet
         course_name = course_name_info[0]
         course_number = course_name_info[1]
 
-        course_time_info = course_times[index].search('td').map { |d| d.text.strip }
+        course_time_info = course_times[index].map do |course_time|
+          course_time.search('td').map { |d| d.text.strip }
+        end
 
         course_data = table.search('tr td').map { |d| d.text.strip }
         args = {
@@ -28,18 +31,36 @@ module Martlet
           credits:     course_data[5],
           level:       course_data[6],
           campus:      course_data[7],
-          time:        course_time_info[0],
-          days:        course_time_info[1],
-          location:    course_time_info[2],
-          date_range:  course_time_info[3],
-          type:        course_time_info[4],
-          instructors: course_time_info[5]
+          time:        course_time_info.first[0],
+          days:        course_time_info.first[1],
+          location:    course_time_info.first[2],
+          date_range:  course_time_info.first[3],
+          type:        course_time_info.first[4],
+          instructors: course_time_info.first[5]
         }
 
         courses << Course.new(args)
       end
 
       courses
+    end
+
+    private
+
+    def split_course_times(course_times)
+      split = []
+      course_times.each do |info|
+        if headers?(info)
+          split << []
+        else
+          split.last << info
+        end
+      end
+      split
+    end
+
+    def headers?(row)
+      !row.search('th').empty?
     end
   end
 end
