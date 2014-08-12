@@ -17,7 +17,9 @@ module Martlet
         course_name = course_name_info[0]
         course_number = course_name_info[1]
 
-        course_time_info = course_times[index][0].search('td').map { |d| d.text.strip }
+        course_time_info = course_times[index].map do |course_time|
+          course_time.search('td').map { |d| d.text.strip }
+        end
 
         course_data = table.search('tr td').map { |d| d.text.strip }
         args = {
@@ -29,12 +31,12 @@ module Martlet
           credits:     course_data[5],
           level:       course_data[6],
           campus:      course_data[7],
-          time:        course_time_info[0],
-          days:        course_time_info[1],
-          location:    course_time_info[2],
-          date_range:  course_time_info[3],
-          type:        course_time_info[4],
-          instructors: course_time_info[5]
+          time:        course_time_info.first[0],
+          days:        course_time_info.first[1],
+          location:    course_time_info.first[2],
+          date_range:  course_time_info.first[3],
+          type:        course_time_info.first[4],
+          instructors: course_time_info.first[5]
         }
 
         courses << Course.new(args)
