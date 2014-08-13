@@ -45,6 +45,7 @@ module Martlet
 
       if options[:export] && !courses.empty?
         puts "Exporting courses to #{semester}_#{year}.ics..."
+        client.export(client.schedule(semester, year))
       end
     end
 
