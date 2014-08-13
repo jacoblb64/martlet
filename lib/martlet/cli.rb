@@ -25,6 +25,10 @@ module Martlet
 
     desc "courses SEMESTER YEAR", "List current courses or courses for given semester and year"
     option :export, :type => :boolean
+    long_desc <<-LONGDESC
+      With --export option, the course schedule is exported as an iCalendar (.ics) file
+      in the current directory.
+    LONGDESC
     def courses(semester = nil, year = nil)
       if semester.nil? || year.nil?
         semester, year = current_semester_and_year
