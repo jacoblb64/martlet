@@ -24,9 +24,7 @@ module Martlet
 
     def calendar_days(days)
       repeat_days = days.map { |day| calendar_day(day) }
-      repeat_days.reduce do |str, day|
-        "#{str},#{day}"
-      end
+      repeat_days.join(',')
     end
 
     def in_days?(date, days)
