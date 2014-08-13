@@ -31,13 +31,18 @@ module Martlet
           credits:     course_data[5],
           level:       course_data[6],
           campus:      course_data[7],
-          time:        course_time_info.first[0],
-          days:        course_time_info.first[1],
-          location:    course_time_info.first[2],
-          date_range:  course_time_info.first[3],
-          type:        course_time_info.first[4],
-          instructors: course_time_info.first[5]
+          meetings:    []
         }
+
+        course_time_info.map do |course_time|
+          meeting_info = {
+            time:        course_time[0],
+            days:        course_time[1],
+            location:    course_time[2],
+            date_range:  course_time[3]
+          }
+          args[:meetings] << CourseMeeting.new(meeting_info)
+        end
 
         courses << Course.new(args)
       end

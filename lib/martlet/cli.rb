@@ -37,7 +37,7 @@ module Martlet
 
       courses.each do |course|
         course_row_format = "%-11s %-#{course_name_size}s @ %s\n"
-        printf course_row_format, "#{course.number}", course.name, course.location
+        printf course_row_format, "#{course.number}", course.name, course.meetings.first.location
       end
 
       puts 'No courses found' if courses.empty?
