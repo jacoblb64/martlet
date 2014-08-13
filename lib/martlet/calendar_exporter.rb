@@ -9,6 +9,22 @@ module Martlet
 
     def export
       courses = @schedule.fetch_courses
+
+      f = File.new(@filename, 'w')
+      f.write("BEGIN:VCALENDAR\r\n")
+
+      courses.each do |course|
+        course.meetings.each do |meeting|
+          if meeting.start_time.nil?
+            puts "Warning: schedule information unavailable for #{course.number}"
+          else
+            f.write(calendar_vevent(course, meeting))
+          end
+        end
+      end
+
+      f.write("END:VCALENDAR\r\n")
+      f.close
     end
 
     private
