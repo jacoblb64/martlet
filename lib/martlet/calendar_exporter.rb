@@ -1,5 +1,7 @@
 module Martlet
   class CalendarExporter
+    include CalendarHelpers
+
     def initialize(schedule)
       @schedule = schedule
       @filename = "#{schedule.semester}_#{schedule.year}.ics"
