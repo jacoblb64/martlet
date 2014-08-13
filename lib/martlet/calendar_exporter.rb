@@ -30,5 +30,22 @@ module Martlet
       repeat_days = calendar_days(meeting.days)
       "FREQ=WEEKLY;INTERVAL=1;UNTIL=#{end_date}T235959;BYDAY=#{repeat_days}"
     end
+
+    def calendar_vevent(course, meeting)
+      begin_vevent = "BEGIN:VEVENT\r\n"
+      summary      = "SUMMARY:#{course.number} - #{course.name}\r\n"
+      location     = "LOCATION:#{meeting.location}\r\n"
+      dtstart      = "DTSTART:#{calendar_dtstart(meeting)}\r\n"
+      dtend        = "DTEND:#{calendar_dtend(meeting)}\r\n"
+      rrule        = "RRULE:#{calendar_rrule(meeting)}\r\n"
+      end_vevent   = "END:VEVENT\r\n"
+
+      if exclude_first_day?(meeting)
+        exdate = "EXDATE:#{calendar_dtstart(meeting)}\r\n"
+        [begin_vevent, summary, location, dtstart, dtend, rrule, exdate, end_vevent].join('')
+      else
+        [begin_vevent, summary, location, dtstart, dtend, rrule, end_vevent].join('')
+      end
+    end
   end
 end
