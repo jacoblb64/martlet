@@ -34,7 +34,7 @@ module Martlet
           meetings:    []
         }
 
-        course_time_info.map do |course_time|
+        course_time_info.each do |course_time|
           meeting_info = {
             time:        course_time[0],
             days:        course_time[1],
