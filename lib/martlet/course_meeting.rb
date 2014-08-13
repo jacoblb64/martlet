@@ -14,7 +14,8 @@ module Martlet
     private
 
     def parse_time_range(time_range)
-      time_range.scan(/\d+:\d+\s[AP]M/)
+      times = time_range.scan(/\d+:\d+\s[AP]M/)
+      times.map { |time| Time.parse(time) }
     end
 
     def parse_date_range(date_range)
