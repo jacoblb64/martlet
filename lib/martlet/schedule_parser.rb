@@ -24,14 +24,12 @@ module Martlet
           course_time.search('td').map { |d| d.text.strip }
         end
 
-        meetings = []
-
-        course_time_info.each do |course_time|
+        meetings = course_time_info.map do |course_time|
           start_time, end_time = parse_time_range(course_time[0])
           start_date, end_date = parse_date_range(course_time[3])
           days = parse_days(course_time[1])
 
-          meetings << CourseMeeting.new({
+          CourseMeeting.new({
             start_time:  start_time,
             end_time:    end_time,
             start_date:  start_date,
