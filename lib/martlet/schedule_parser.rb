@@ -24,7 +24,6 @@ module Martlet
           course_time.search('td').map { |d| d.text.strip }
         end
 
-
         meetings = []
 
         course_time_info.each do |course_time|
