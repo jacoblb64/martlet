@@ -7,13 +7,12 @@ module Martlet
     end
 
     def parse_courses
-      courses = []
       document = Nokogiri::HTML(@html)
       course_tables = document.search("br+table[@class='datadisplaytable']")
       course_times  = document.search("br+table[@class='datadisplaytable']+table tr")
       course_times  = split_course_times(course_times)
 
-      course_tables.each_with_index do |table, index|
+      courses = course_tables.map.with_index do |table, index|
         course_name_info = table.search('caption').first
         course_name_info = course_name_info.text.split(' - ')
         course_name = course_name_info[0]
@@ -39,7 +38,7 @@ module Martlet
           })
         end
 
-        courses << Course.new({
+        Course.new({
           name:        course_name,
           number:      course_number,
           term:        course_data[0],
@@ -51,8 +50,6 @@ module Martlet
           meetings:    meetings
         })
       end
-
-      courses
     end
 
     private
