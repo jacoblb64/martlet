@@ -8,6 +8,7 @@ require 'martlet/schedule_parser'
 require 'martlet/record'
 require 'martlet/grade'
 require 'martlet/course'
+require 'martlet/course_meeting'
 require 'martlet/version'
 
 module Martlet
