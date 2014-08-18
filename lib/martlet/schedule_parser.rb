@@ -19,12 +19,30 @@ module Martlet
         course_name = course_name_info[0]
         course_number = course_name_info[1]
 
+        course_data = table.search('tr td').map { |d| d.text.strip }
         course_time_info = course_times[index].map do |course_time|
           course_time.search('td').map { |d| d.text.strip }
         end
 
-        course_data = table.search('tr td').map { |d| d.text.strip }
-        args = {
+
+        meetings = []
+
+        course_time_info.each do |course_time|
+          start_time, end_time = parse_time_range(course_time[0])
+          start_date, end_date = parse_date_range(course_time[3])
+          days = parse_days(course_time[1])
+
+          meetings << CourseMeeting.new({
+            start_time:  start_time,
+            end_time:    end_time,
+            start_date:  start_date,
+            end_date:    end_date,
+            days:        days,
+            location:    course_time[2]
+          })
+        end
+
+        courses << Course.new({
           name:        course_name,
           number:      course_number,
           term:        course_data[0],
@@ -33,26 +51,8 @@ module Martlet
           credits:     course_data[5],
           level:       course_data[6],
           campus:      course_data[7],
-          meetings:    []
-        }
-
-        course_time_info.each do |course_time|
-          start_time, end_time = parse_time_range(course_time[0])
-          start_date, end_date = parse_date_range(course_time[3])
-          days = parse_days(course_time[1])
-
-          meeting_info = {
-            start_time: start_time,
-            end_time:   end_time,
-            start_date: start_date,
-            end_date:   end_date,
-            days:       days,
-            location:   course_time[2]
-          }
-          args[:meetings] << CourseMeeting.new(meeting_info)
-        end
-
-        courses << Course.new(args)
+          meetings:    meetings
+        })
       end
 
       courses
