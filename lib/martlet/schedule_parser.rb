@@ -1,5 +1,7 @@
 module Martlet
   class ScheduleParser
+    include DayConversions
+
     def initialize(html)
       @html = html
     end
@@ -35,11 +37,17 @@ module Martlet
         }
 
         course_time_info.each do |course_time|
+          start_time, end_time = parse_time_range(course_time[0])
+          start_date, end_date = parse_date_range(course_time[3])
+          days = parse_days(course_time[1])
+
           meeting_info = {
-            time:        course_time[0],
-            days:        course_time[1],
-            location:    course_time[2],
-            date_range:  course_time[3]
+            start_time: start_time,
+            end_time:   end_time,
+            start_date: start_date,
+            end_date:   end_date,
+            days:       days,
+            location:   course_time[2]
           }
           args[:meetings] << CourseMeeting.new(meeting_info)
         end
@@ -66,6 +74,20 @@ module Martlet
 
     def headers?(row)
       !row.search('th').empty?
+    end
+
+    def parse_time_range(time_range)
+      times = time_range.scan(/\d+:\d+\s[AP]M/)
+      times.map { |time| Time.parse(time) }
+    end
+
+    def parse_date_range(date_range)
+      dates = date_range.scan(/\w+\s\d+,\s\d+/)
+      dates.map { |date| Date.parse(date) }
+    end
+
+    def parse_days(days)
+      days.split('').map { |letter| day_from_letter(letter) }
     end
   end
 end
