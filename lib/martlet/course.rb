@@ -15,5 +15,9 @@ module Martlet
 
       @name.gsub! /\.$/, ''
     end
+
+    def location
+      meetings.first.location
+    end
   end
 end
