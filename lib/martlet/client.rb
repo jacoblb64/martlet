@@ -22,8 +22,7 @@ module Martlet
     end
 
     def courses(semester, year)
-      schedule = schedule(semester, year)
-      schedule.fetch_courses
+      schedule(semester, year).fetch_courses
     end
 
     def export(schedule)
