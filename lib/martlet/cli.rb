@@ -32,7 +32,8 @@ module Martlet
       end
 
       puts 'Fetching courses...'
-      courses = client.courses(semester, year)
+      schedule = client.schedule(semester, year)
+      courses = schedule.fetch_courses
       course_name_size = courses.map { |c| c.name.length }.max
 
       puts "#{semester.capitalize} #{year} courses"
@@ -46,7 +47,7 @@ module Martlet
 
       if options[:export] && !courses.empty?
         puts "Exporting courses to #{semester}_#{year}.ics..."
-        client.export_calendar(client.schedule(semester, year))
+        client.export_calendar(schedule)
       end
     end
 
