@@ -3,11 +3,11 @@ module Martlet
     include DayConversions
 
     def calendar_time(time)
-      format("%02d%02d00", time.hour, time.min)
+      sprintf "%02d%02d00", time.hour, time.min
     end
 
     def calendar_date(date)
-      format("%04d%02d%02d", date.year, date.month, date.day)
+      sprintf "%04d%02d%02d", date.year, date.month, date.day
     end
 
     def calendar_day(day)
