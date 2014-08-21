@@ -24,6 +24,7 @@ module Martlet
       end
 
       f.write("END:VCALENDAR\r\n")
+    ensure
       f.close
     end
 
