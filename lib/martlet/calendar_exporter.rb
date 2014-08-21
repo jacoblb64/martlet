@@ -15,10 +15,10 @@ module Martlet
 
       courses.each do |course|
         course.meetings.each do |meeting|
-          if meeting.start_time.nil?
-            puts "Warning: schedule information unavailable for #{course.number}"
-          else
+          if meeting.start_time
             f.write(calendar_vevent(course, meeting))
+          else
+            puts "Warning: schedule information unavailable for #{course.number}"
           end
         end
       end
