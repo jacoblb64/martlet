@@ -2,18 +2,16 @@ module Martlet
   class CalendarExporter
     include CalendarHelpers
 
-    def initialize(schedule)
-      @schedule = schedule
-      @filename = "#{schedule.semester}_#{schedule.year}.ics"
+    def initialize(filename, courses)
+      @filename = filename
+      @courses  = courses
     end
 
     def export
-      courses = @schedule.fetch_courses
-
       f = File.new(@filename, 'w')
       f.write("BEGIN:VCALENDAR\r\n")
 
-      courses.each do |course|
+      @courses.each do |course|
         course.meetings.each do |meeting|
           if meeting.start_time
             f.write(calendar_vevent(course, meeting))

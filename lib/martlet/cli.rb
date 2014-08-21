@@ -46,8 +46,9 @@ module Martlet
       puts 'No courses found' if courses.empty?
 
       if options[:export] && !courses.empty?
-        puts "Exporting courses to #{semester}_#{year}.ics..."
-        client.export_calendar(schedule)
+        filename = "#{semester}_#{year}.ics"
+        puts "Exporting courses to #{filename}..."
+        client.export_calendar(filename, courses)
       end
     end
 

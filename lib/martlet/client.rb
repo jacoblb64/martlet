@@ -25,8 +25,8 @@ module Martlet
       schedule(semester, year).fetch_courses
     end
 
-    def export_calendar(schedule)
-      exporter = CalendarExporter.new(schedule)
+    def export_calendar(filename, courses)
+      exporter = CalendarExporter.new(filename, courses)
       exporter.export
     end
   end
