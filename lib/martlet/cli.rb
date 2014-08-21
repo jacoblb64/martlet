@@ -7,7 +7,7 @@ module Martlet
     default_task :grades
 
     desc "grades", "Lists all your grades"
-    method_option :sort, aliases: 's', enum: ['course', 'grade']
+    option :sort, aliases: 's', enum: ['course', 'grade']
     def grades
       puts 'Fetching grades...'
       grades = client.grades
@@ -24,13 +24,16 @@ module Martlet
     end
 
     desc "courses SEMESTER YEAR", "List current courses or courses for given semester and year"
+    option :export, type: :boolean, default: false,
+                    desc: "Export course schedule as an iCalendar (.ics) file in the current directory"
     def courses(semester = nil, year = nil)
       if semester.nil? || year.nil?
         semester, year = current_semester_and_year
       end
 
       puts 'Fetching courses...'
-      courses = client.courses(semester, year)
+      schedule = client.schedule(semester, year)
+      courses = schedule.fetch_courses
       course_name_size = courses.map { |c| c.name.length }.max
 
       puts "#{semester.capitalize} #{year} courses"
@@ -41,6 +44,12 @@ module Martlet
       end
 
       puts 'No courses found' if courses.empty?
+
+      if options[:export] && !courses.empty?
+        filename = "#{semester}_#{year}.ics"
+        puts "Exporting courses to #{filename}..."
+        client.export_calendar(filename, courses)
+      end
     end
 
     private
