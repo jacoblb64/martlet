@@ -3,4 +3,7 @@
 require 'martlet'
 require 'martlet/cli'
 
-Martlet::CLI.start(ARGV)
+args = ARGV.dup
+ARGV.clear
+
+Martlet::CLI.start(args)
