@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  {% include head.html %}
+  <body>
+    {% include header.html %}
+
+    <div class="hero">
+      <h2 class="hero__title">Minerva, simplified.</h2>
+      <div class="wrapper">
+        <div class="editor editor--hidden">
+          <div class="editor__frame">
+            <div class="editor__buttons">
+              <div class="editor__button editor__button--red"></div>
+              <div class="editor__button editor__button--yellow"></div>
+              <div class="editor__button editor__button--green"></div>
+            </div>
+            Terminal
+          </div>
+          <pre class="editor__content"><span class="editor__prompt">$</span> gem install martlet
+Successfully installed martlet
+1 gem installed</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper">
+      {{ content }}
+    </div>
+  </body>
+</html>

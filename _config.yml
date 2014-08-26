@@ -1,0 +1,6 @@
+title: Martlet
+baseurl: "/martlet/"
+url: "http://alexcoco.github.io"
+githuburl: "http://github.com/alexcoco/martlet"
+
+markdown: kramdown
