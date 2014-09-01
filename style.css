@@ -30,7 +30,7 @@ a, a:visited, a:hover { color: #666; text-decoration: none; }
 .main-header__github {
   color: #444;
   position: absolute;
-  right: 0;
+  right: 10px;
   top: 17px;
   font-size: 18px;
 }
@@ -53,13 +53,14 @@ a, a:visited, a:hover { color: #666; text-decoration: none; }
 .wrapper {
   position: relative;
   margin: 0 auto;
-  width: 600px;
+  padding: 0 10px;
+  max-width: 580px;
 }
 
 .editor {
   background-color: #2b303b;
   display: block;
-  width: 500px;
+  max-width: 500px;
   margin: 0 auto;
   position: relative;
   border-radius: 5px;
@@ -116,6 +117,7 @@ a, a:visited, a:hover { color: #666; text-decoration: none; }
   line-height: 15px;
   padding: 15px 20px;
   margin: 0;
+  white-space: pre-wrap;
 }
 
 .editor__prompt {
