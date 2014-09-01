@@ -3,6 +3,6 @@ layout: frontpage
 ---
 
 {% include updating.html %}
-{% include configuration.html %}
+{% include configuring.html %}
 {% include grades.html %}
 {% include courses.html %}
