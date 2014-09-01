@@ -6,6 +6,6 @@ baseurl: "/martlet/"
 url: "http://alexcoco.github.io"
 githuburl: "http://github.com/alexcoco/martlet"
 
-version: 0.0.8
+version: 0.1.0
 
 markdown: kramdown
