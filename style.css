@@ -23,6 +23,10 @@ a, a:visited, a:hover { color: #666; text-decoration: none; }
   height: 43px;
 }
 
+.main-header__title a {
+  color: inherit !important;
+}
+
 .main-header__github {
   color: #444;
   position: absolute;
