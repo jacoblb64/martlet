@@ -1,0 +1,58 @@
+### Fetching Courses
+
+To fetch courses for any semester and year, type `martlet courses` followed by the semester (`fall`, `winter`, or `summer`) and 4-digit year. Martlet will default to the current semester and year if no arguments are present.
+
+<div class="editor editor--inline">
+  <div class="editor__frame">
+    <div class="editor__buttons">
+      <div class="editor__button editor__button--red"></div>
+      <div class="editor__button editor__button--yellow"></div>
+      <div class="editor__button editor__button--green"></div>
+    </div>
+    Terminal
+  </div>
+  <pre class="editor__content"><span class="editor__prompt">$</span> martlet courses fall 2014
+Fetching courses...
+Authenticating...
+Fall 2014 courses
+COMP 409    Concurrent Programming      @ Burnside Hall 1B36
+COMP 525    Formal Verification         @ Trottier Building 2100
+...</pre>
+</div>
+
+### Exporting Courses
+
+Courses can optionally be exported in iCalendar format. To export the course schedule as an `.ics` file in the current directory, pass the `--export` option to the `courses` command.
+
+
+<div class="editor editor--inline">
+  <div class="editor__frame">
+    <div class="editor__buttons">
+      <div class="editor__button editor__button--red"></div>
+      <div class="editor__button editor__button--yellow"></div>
+      <div class="editor__button editor__button--green"></div>
+    </div>
+    Terminal
+  </div>
+  <pre class="editor__content"><span class="editor__prompt">$</span> martlet courses fall 2014 --export
+Fetching courses...
+Authenticating...
+Fall 2014 courses
+COMP 409    Concurrent Programming      @ Burnside Hall 1B36
+COMP 525    Formal Verification         @ Trottier Building 2100
+...
+Exporting courses to fall_2014.ics...</pre>
+</div>
+
+To import the calendar into Apple Calendar:
+
+1. Go to `File > Import > Import...`
+2. Select the `.ics` file and click `Import`
+3. Choose a new or existing calendar to import into and click `OK`
+
+To import the calendar into Google Calendar:
+
+1. Click the down arrow next to `Other Calendars`
+2. Select `Import calendar`
+3. Select the `.ics` file and click `Open`
+4. Select the Google Calendar you want to import into and click `Import`

@@ -1,0 +1,45 @@
+### Fetching Grades
+
+<div class="editor editor--inline">
+  <div class="editor__frame">
+    <div class="editor__buttons">
+      <div class="editor__button editor__button--red"></div>
+      <div class="editor__button editor__button--yellow"></div>
+      <div class="editor__button editor__button--green"></div>
+    </div>
+    Terminal
+  </div>
+  <pre class="editor__content"><span class="editor__prompt">$</span> martlet grades
+Fetching grades...
+Authenticating...
+COMP 206: A
+COMP 250: A
+...</pre>
+</div>
+
+### Sorting Grades
+
+Grades can be sorted by course or grade. To sort grades, pass either `course` or `grade` to the `--sort` (or `-s`) option.
+
+<div class="editor editor--inline">
+  <div class="editor__frame">
+    <div class="editor__buttons">
+      <div class="editor__button editor__button--red"></div>
+      <div class="editor__button editor__button--yellow"></div>
+      <div class="editor__button editor__button--green"></div>
+    </div>
+    Terminal
+  </div>
+  <pre class="editor__content"><span class="editor__prompt">$</span> martlet grades --sort course
+Fetching grades...
+Authenticating...
+CCOM 206: A
+CHEM 120: B+
+...
+<span class="editor__prompt">$</span> martlet grades --sort grade
+Fetching grades...
+Authenticating...
+COMP 206: A
+COMP 250: A
+...</pre>
+</div>

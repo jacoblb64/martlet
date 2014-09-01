@@ -49,7 +49,7 @@ a, a:visited, a:hover { color: #666; text-decoration: none; }
 .wrapper {
   position: relative;
   margin: 0 auto;
-  width: 800px;
+  width: 600px;
 }
 
 .editor {
@@ -119,5 +119,22 @@ a, a:visited, a:hover { color: #666; text-decoration: none; }
 }
 
 .main-footer {
-  margin: 20px 0;
+  color: #555;
+  font-size: 14px;
+  text-align: center;
+
+  border-top: 1px solid #ccc;
+  margin: 30px 0;
+  padding: 20px 0 0 0;
+}
+
+.main-footer a {
+  text-decoration: underline;
+}
+
+p code, ol code {
+  background-color: #d3dbe2;
+  border-radius: 2px;
+  font-size: 14px;
+  padding: 2px 3px;
 }

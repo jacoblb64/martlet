@@ -7,7 +7,7 @@
     <div class="hero">
       <h2 class="hero__title">Minerva, simplified.</h2>
       <div class="wrapper">
-        <div class="editor editor--hidden">
+        <div id="installing-martlet" class="editor editor--hidden">
           <div class="editor__frame">
             <div class="editor__buttons">
               <div class="editor__button editor__button--red"></div>
@@ -25,6 +25,8 @@ Successfully installed martlet
 
     <div class="wrapper">
       {{ content }}
+
+      {% include footer.html %}
     </div>
 
     {% include analytics.html %}
