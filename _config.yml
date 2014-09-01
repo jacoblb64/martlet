@@ -1,5 +1,5 @@
 title: Martlet
-summary: "Minerva, simplified"
+summary: "Martlet: Minerva, simplified"
 description: "Martlet is a Ruby client for McGill's student portal, Minerva. Minerva sucks, and constantly checking your grades sucks even more."
 
 baseurl: "/martlet/"
