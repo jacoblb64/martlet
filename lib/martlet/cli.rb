@@ -52,6 +52,10 @@ module Martlet
       end
     end
 
+    def self.exit_on_failure?
+      true
+    end
+
     private
 
     def credentials
@@ -81,6 +85,9 @@ module Martlet
         puts 'Authenticating...'
         Martlet.new(*credentials)
       end
+    rescue StandardError => e
+      puts "Error: #{e.message}"
+      exit 1
     end
 
     def config_path
