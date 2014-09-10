@@ -1,3 +1,5 @@
+Fork of Alex's minerva client to notify upon course availability
+
 # Martlet
 
 Martlet is a Ruby client for McGill's student portal, Minerva. Minerva sucks and constantly checking your grades sucks even more.
